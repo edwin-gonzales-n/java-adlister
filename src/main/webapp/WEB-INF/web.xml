@@ -9,4 +9,19 @@
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
+
+    <!--<servlet>-->
+
+        <!--<servlet-name>myinputservlet</servlet-name>-->
+        <!--<servlet-class>InputServlet</servlet-class>-->
+
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+
+        <!--<servlet-name>myinputservlet</servlet-name>-->
+        <!--<url-pattern>/in</url-pattern>-->
+
+    <!--</servlet-mapping>-->
+
 </web-app>
