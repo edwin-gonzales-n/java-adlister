@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html style="padding: 10px; background: antiquewhite">
+<html style="padding: 10px; background: deepskyblue">
 <head>
     <title>Title</title>
 </head>
@@ -14,7 +14,3 @@
 
 </body>
 </html>
-
-<div style="padding: 10px; background: antiquewhite">
-
-</div>

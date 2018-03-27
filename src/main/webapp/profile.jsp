@@ -8,11 +8,12 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="partials/welcome-message.jsp"%>
+<%@ include file="partials/nav-bar.jsp"%>
 <html>
 <head>
     <title>User Form</title>
 </head>
 <body>
-<h1 style="text-align: center">Welcome home admin!!!</h1>
+<%--<h1 style="text-align: center">Welcome home admin!!!</h1>--%>
 </body>
 </html>

@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="java.io.*,java.util.*"%>
 <%@ include file="partials/welcome-message.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -27,6 +26,7 @@ String password = request.getParameter("password");
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="resources/css/jstl-example.css">
 </head>
 <body>
     <div style="text-align: center;">
