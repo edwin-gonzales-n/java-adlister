@@ -6,20 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-String colorname = request.getParameter("mycolor");
-
-if(colorname== null){
-colorname = "blank";
-}
-%>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
 
-<form action="color_redirect.jsp" method="get">
+<form action="/color" method="post">
 
     <b>Enter your favorite color:</b>
     <input type="text" name="mycolor" width="20">
