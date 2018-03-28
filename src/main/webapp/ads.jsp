@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: Gonzo
-  Date: 3/27/18
-  Time: 10:19 AM
+  Date: 3/28/18
+  Time: 4:30 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Ajax Blog</title>
+    <title>Ads</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -26,7 +26,7 @@
 <div class="container">
 
     <nav class="navbar navbar-light bg-primary container" style="background: black">
-        <a class="navbar-brand" href="#"><strong>Da Admin's Platz</strong></a>
+        <a class="navbar-brand" href="#"><strong>Gonzo's SA Ads</strong></a>
         <div class="navbar-light" id="navbarSupportedContent">
             <form class="form-inline my-2 my-lg-0">
                 <input id="userInput" class="form-control mr-sm-2" type="text" placeholder="Search">
@@ -107,3 +107,4 @@
 </script>
 </body>
 </html>
+
