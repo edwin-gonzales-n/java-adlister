@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="guess_redirect.jsp" method="get">
+    <form action="/guess" method="get">
 
         <b>Guess a number between 1 and 100:</b>
         <input type="text" name="mynumber" width="20">
