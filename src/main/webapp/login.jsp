@@ -7,21 +7,20 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="partials/welcome-message.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%
-String username = request.getParameter("username");
-String password = request.getParameter("password");
+<%--<%--%>
+<%--String username = request.getParameter("username");--%>
+<%--String password = request.getParameter("password");--%>
 
-    if(username == null && password == null){
-        username = "user";
-    }
+    <%--if(username == null && password == null){--%>
+        <%--username = "user";--%>
+    <%--}--%>
 
-    assert username != null;
-    if(username.equals("admin") && password.equals("password")){
-        response.sendRedirect("profile.jsp");
-    }
-%>
+    <%--assert username != null;--%>
+    <%--if(username.equals("admin") && password.equals("password")){--%>
+        <%--response.sendRedirect("profile.jsp");--%>
+    <%--}--%>
+<%--%>--%>
 
 <html>
 <head>
@@ -29,23 +28,13 @@ String password = request.getParameter("password");
     <link rel="stylesheet" href="resources/css/jstl-example.css">
 </head>
 <body>
-    <%--<div style="text-align: center;">--%>
-        <%--<form method="post" action="login.jsp">--%>
-            <%--<b>LOGIN :</b>--%>
-            <%--<input type="text" name="username" placeholder="please type your email" width="20">--%>
-            <%--<label>--%>
-                <%--<input type="password" name="password">--%>
-            <%--</label>--%>
-            <%--<button type="submit">Login</button>--%>
-        <%--</form>--%>
-    <%--</div>--%>
     <div class="login-box">
         <div class="login-logo">
             <a href="http://www.gygproductions.com/"><img src="resources/img/DJ-Gonzo-Logo_website.png"></a>
         </div><!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start your session</p>
-            <form action="login.jsp" method="post" accept-charset="utf-8">
+            <form action="/login" method="post" accept-charset="utf-8">
                 <div class="form-group has-feedback">
                 <input type="text" name="username" value="" placeholder="Username" class="form-control" id="login" maxlength="80" size="30">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
