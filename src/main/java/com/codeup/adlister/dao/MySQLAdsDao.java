@@ -51,8 +51,6 @@ public class MySQLAdsDao implements Ads {
             preparedStatement.setString(3,ad.getDescription());
             preparedStatement.executeUpdate();
 
-//            Statement stmt = connection.createStatement();
-//            stmt.executeUpdate(createInsertQuery(ad), Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = preparedStatement.getGeneratedKeys();
             rs.next();
             return rs.getLong(1);
