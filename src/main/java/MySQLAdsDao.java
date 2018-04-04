@@ -17,8 +17,6 @@ public class MySQLAdsDao implements Ads{
 
         } catch (SQLException e) {
             throw new RuntimeException("Error connection to DB.", e);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
