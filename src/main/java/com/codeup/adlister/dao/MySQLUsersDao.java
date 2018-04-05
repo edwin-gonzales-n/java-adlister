@@ -1,7 +1,9 @@
 package com.codeup.adlister.dao;
 
+import com.codeup.adlister.controllers.Config;
 import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 
@@ -28,6 +30,7 @@ public class MySQLUsersDao implements Users {
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, username);
+
             return extractUser(stmt.executeQuery());
         } catch (SQLException e) {
             throw new RuntimeException("Error finding a user by username", e);
@@ -36,12 +39,12 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public Long insert(User user) {
-        String query = "INSERT INTO users(username, email, password) VALUES (?, ?, ?)";
+        String query = "INSERT INTO users(username, email, password, created_at,updated_at) VALUES (?, ?, ?,now(),now())";
         try {
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getPassword());
+            stmt.setString(3, hashPassword(user.getPassword()));
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
@@ -49,6 +52,11 @@ public class MySQLUsersDao implements Users {
         } catch (SQLException e) {
             throw new RuntimeException("Error creating new user", e);
         }
+    }
+
+    private String hashPassword(String password) {
+        int numberOfRounds = 12;
+        return BCrypt.hashpw(password, BCrypt.gensalt(numberOfRounds));
     }
 
     private User extractUser(ResultSet rs) throws SQLException {
@@ -61,6 +69,20 @@ public class MySQLUsersDao implements Users {
             rs.getString("email"),
             rs.getString("password")
         );
+    }
+
+    public long VerifyPassword (String username, String password){
+        User user = findByUsername(username);
+
+        if (user == null){
+            return 0;
+        } else {
+            if(BCrypt.checkpw(password, user.getPassword())){
+                return user.getId();
+            } else {
+                return 0;
+            }
+        }
     }
 
 }
