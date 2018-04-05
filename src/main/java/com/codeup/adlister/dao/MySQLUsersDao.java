@@ -39,7 +39,7 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public Long insert(User user) {
-        String query = "INSERT INTO users(username, email, password, created_at,updated_at) VALUES (?, ?, ?,now(),now())";
+        String query = "INSERT INTO users(username, email, password) VALUES (?, ?, ?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getUsername());
@@ -71,16 +71,16 @@ public class MySQLUsersDao implements Users {
         );
     }
 
-    public long VerifyPassword (String username, String password){
+    public boolean VerifyPassword (String username, String password){
         User user = findByUsername(username);
 
         if (user == null){
-            return 0;
+            return false;
         } else {
             if(BCrypt.checkpw(password, user.getPassword())){
-                return user.getId();
+                return true;
             } else {
-                return 0;
+                return false;
             }
         }
     }

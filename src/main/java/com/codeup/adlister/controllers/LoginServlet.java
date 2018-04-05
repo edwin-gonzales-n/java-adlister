@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
@@ -25,19 +26,23 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        User user = DaoFactory.getUsersDao().findByUsername(username);
+        Users usersDao = DaoFactory.getUsersDao();
+        User user = usersDao.findByUsername(username);
+        boolean authenticated = usersDao.VerifyPassword(username,password);
+        HttpSession session = request.getSession();
 
         if (user == null) {
             response.sendRedirect("/login");
             return;
         }
 
-        boolean validAttempt = password.equals(user.getPassword());
+//        boolean validAttempt = password.equals(user.getPassword());
 
-        if (validAttempt) {
+        if (authenticated) {
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/profile");
         } else {
+            session.setAttribute("username_error",  "<p style=\"color:red\">Sorry \"username\" error!</p>");
             response.sendRedirect("/login");
         }
     }

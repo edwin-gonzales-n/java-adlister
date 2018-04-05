@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
@@ -17,25 +18,58 @@ public class RegisterServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String passwordConfirmation = request.getParameter("confirm_password");
+        String  username = request.getParameter("username"),
+                password = request.getParameter("password"),
+                password_confirm = request.getParameter("password_confirm"),
+                email = request.getParameter("email");
+        HttpSession session = request.getSession();
 
-        // validate input
-        boolean inputHasErrors = username.isEmpty()
-            || email.isEmpty()
-            || password.isEmpty()
-            || (! password.equals(passwordConfirmation));
-
-        if (inputHasErrors) {
+        if (password == null || password.trim() == ""){
+            session.removeAttribute("password_error");
+            session.removeAttribute("email_error");
+            session.removeAttribute("username_error");
+            session.removeAttribute("password_mismatch");
+            session.setAttribute("password_error",  "<p style=\"color:red\">Sorry \"password\" error!</p>");
             response.sendRedirect("/register");
-            return;
+        } else if(!password.equals(password_confirm)){
+            session.removeAttribute("password_error");
+            session.removeAttribute("email_error");
+            session.removeAttribute("username_error");
+            session.removeAttribute("password_mismatch");
+            session.setAttribute("password_mismatch",  "<p style=\"color:red\">Sorry \"passwords\" do not match!</p>");
+            response.sendRedirect("/register");
+        }
+        else if (email == null || email.trim() == ""){
+            session.removeAttribute("password_error");
+            session.removeAttribute("email_error");
+            session.removeAttribute("username_error");
+            session.removeAttribute("password_mismatch");
+            session.setAttribute("email_error",  "<p style=\"color:red\">Sorry \"email\" error!</p>");
+            response.sendRedirect("/register");
+        } else if (username == null || username.trim() == ""){
+            session.removeAttribute("password_error");
+            session.removeAttribute("email_error");
+            session.removeAttribute("username_error");
+            session.removeAttribute("password_mismatch");
+            session.setAttribute("username_error",  "<p style=\"color:red\">Sorry \"username\" error!</p>");
+            response.sendRedirect("/register");
+        } else {
+            session.removeAttribute("password_error");
+            session.removeAttribute("password_mismatch");
+            session.removeAttribute("email_error");
+            session.removeAttribute("username_error");
+            session.setAttribute("username", username);
+            session.setAttribute("password", password);
+            session.setAttribute("email", email);
+            User user = new User(
+                    1,
+                    request.getParameter("username"),
+                    request.getParameter("email"),
+                    request.getParameter("password")
+            );
+            DaoFactory.getUsersDao().insert(user);
+            response.sendRedirect("/profile");
         }
 
-        // create and save a new user
-        User user = new User(username, email, password);
-        DaoFactory.getUsersDao().insert(user);
-        response.sendRedirect("/login");
     }
 }
