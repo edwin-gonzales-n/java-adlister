@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", username);
             response.sendRedirect("/profile");
         } else {
+            session.setAttribute("username_error",  "<p style=\"color:red\">Sorry \"username\" error!</p>");
             response.sendRedirect("/login");
         }
     }
