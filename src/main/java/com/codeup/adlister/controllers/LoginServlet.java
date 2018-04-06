@@ -33,6 +33,8 @@ public class LoginServlet extends HttpServlet {
 
         if (user == null) {
             response.sendRedirect("/login");
+            session.removeAttribute("password_error");
+            session.setAttribute("username_error",  "<p style=\"color:red\">Sorry \"wrong username\"!</p>");
             return;
         }
 
@@ -42,7 +44,8 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/profile");
         } else {
-            session.setAttribute("username_error",  "<p style=\"color:red\">Sorry \"username\" error!</p>");
+            session.removeAttribute("username_error");
+            session.setAttribute("password_error",  "<p style=\"color:red\">Sorry \"wrong password\"!</p>");
             response.sendRedirect("/login");
         }
     }
